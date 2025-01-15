@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { useForm } from "../hooks/useForm"
 
 export const FormsApp = () => {
@@ -14,6 +15,13 @@ export const FormsApp = () => {
         event.preventDefault()
         console.log({ username, email, password });
     }
+
+    const focusRef = useRef()
+
+    useEffect(() => { // foco automático en el input de type email
+        focusRef.current.focus()
+    }, [])
+    
 
     return (
         <>
@@ -32,6 +40,7 @@ export const FormsApp = () => {
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input
+                        ref={focusRef}
                         type="email"
                         className="form-control"
                         id="email"
